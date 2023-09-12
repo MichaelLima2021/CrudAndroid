@@ -3,7 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/IFSP/StudioProjects/CrudAndroid/app/src/main/res/layout/activity_cadastro.xml" value="0.14814814814814814" />
+        <entry key="..\:/Users/IFSP/StudioProjects/CrudAndroid/app/src/main/res/layout/activity_edit.xml" value="0.14629629629629629" />
         <entry key="..\:/Users/IFSP/StudioProjects/CrudAndroid/app/src/main/res/layout/activity_main.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/IFSP/StudioProjects/CrudAndroid/app/src/main/res/menu/menuzinho.xml" value="0.36666666666666664" />
       </map>
     </option>
   </component>
