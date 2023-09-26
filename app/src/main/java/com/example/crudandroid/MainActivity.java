@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
@@ -18,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -27,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     public Button botao;
     public ArrayList<String> filmesArray;
     public ArrayList<Integer> idsArray;
+    TextView textViewSaudacao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +51,11 @@ public class MainActivity extends AppCompatActivity {
         criarBancoDados();
         //inserirDadosTemp();
         listarDados();
+
+        textViewSaudacao = (TextView) findViewById(R.id.textViewSaudacao);
+        SharedPreferences sharedPref = getSharedPreferences("crudandroidpref", MODE_PRIVATE);
+        String login = sharedPref.getString("login","");
+        textViewSaudacao.setText("Olá "+login+"!");
     }
 
     @Override
@@ -85,7 +93,8 @@ public class MainActivity extends AppCompatActivity {
                     "id INTEGER PRIMARY KEY AUTOINCREMENT" +
                     " , nome VARCHAR " +
                     " , genero VARCHAR " +
-                    " , faixaetaria INTEGER)");
+                    " , faixaetaria INTEGER " +
+                    " , login VARCHAR)");
             bancoDados.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -121,8 +130,11 @@ public class MainActivity extends AppCompatActivity {
     @SuppressLint("Range")
     public void listarDados() {
         try {
+            SharedPreferences sharedPref = getSharedPreferences("crudandroidpref", MODE_PRIVATE);
+            String login = sharedPref.getString("login","");
+
             bancoDados = openOrCreateDatabase("crudandroid", MODE_PRIVATE, null);
-            Cursor meuCursor = bancoDados.rawQuery("SELECT id, nome, genero, faixaetaria FROM filme", null);
+            Cursor meuCursor = bancoDados.rawQuery("SELECT id, nome, genero, faixaetaria FROM filme WHERE login='" + login + "'", null);
             filmesArray = new ArrayList<String>();
             idsArray = new ArrayList<Integer>();
             ArrayAdapter adapter =
