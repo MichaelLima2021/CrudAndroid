@@ -4,14 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#C8F6C7"
+    android:backgroundTint="#C8F6C7"
     tools:context=".CadastroActivity">
 
     <EditText
-        android:id="@+id/editTextFilme"
+        android:id="@+id/editTextTitulo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Digite o nome do filme"
+        android:hint="Digite o titulo livro"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,20 +25,20 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:ems="10"
-        android:hint="Genero"
+        android:hint="Genero Textual"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextFilme" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextTitulo" />
 
     <EditText
-        android:id="@+id/editTextFaixaEtaria"
+        android:id="@+id/editTextAutor"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:ems="10"
-        android:hint=" Faixa etária"
+        android:hint=" Autor "
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -48,9 +50,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
+        android:backgroundTint="#4CAF50"
         android:text="Cadastrar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextFaixaEtaria" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextAutor" />
 </androidx.constraintlayout.widget.ConstraintLayout>

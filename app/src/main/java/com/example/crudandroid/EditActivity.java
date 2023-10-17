@@ -15,9 +15,9 @@ import android.widget.EditText;
 
 public class EditActivity extends AppCompatActivity {
     public SQLiteDatabase bancoDados;
-    public EditText editTextFilme;
+    public EditText editTextTitulo;
     public EditText editTextGenero;
-    public EditText editTextFaixaEtaria;
+    public EditText editTextAutor;
     public Button button;
     public Integer id;
 
@@ -29,9 +29,9 @@ public class EditActivity extends AppCompatActivity {
         Intent intent = getIntent();
         id = intent.getIntExtra("id",0);
 
-        editTextFilme = (EditText) findViewById(R.id.editTextFilme);
+        editTextTitulo = (EditText) findViewById(R.id.editTextTitulo);
         editTextGenero = (EditText) findViewById(R.id.editTextGenero);
-        editTextFaixaEtaria = (EditText) findViewById(R.id.editTextFaixaEtaria);
+        editTextAutor = (EditText) findViewById(R.id.editTextAutor);
         button = (Button) findViewById(R.id.button);
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -48,11 +48,11 @@ public class EditActivity extends AppCompatActivity {
     public void carregarDados(){
         try {
             bancoDados = openOrCreateDatabase("crudandroid", MODE_PRIVATE, null);
-            Cursor cursor = bancoDados.rawQuery("SELECT id,nome, genero, faixaetaria FROM filme WHERE id = " + id.toString(), null);
+            Cursor cursor = bancoDados.rawQuery("SELECT id,titulo, genero, autor FROM livro WHERE id = " + id.toString(), null);
             if(cursor.moveToFirst()) {
-                editTextFilme.setText(cursor.getString(cursor.getColumnIndex("nome")));
+                editTextTitulo.setText(cursor.getString(cursor.getColumnIndex("titulo")));
                 editTextGenero.setText(cursor.getString(cursor.getColumnIndex("genero")));
-                editTextFaixaEtaria.setText(cursor.getString(cursor.getColumnIndex("faixaetaria")));
+                editTextAutor.setText(cursor.getString(cursor.getColumnIndex("autor")));
             }
 
             bancoDados.close();
@@ -62,16 +62,16 @@ public class EditActivity extends AppCompatActivity {
     }
 
     public void alterar(){
-        if(TextUtils.isEmpty(editTextFilme.getText().toString())){
-            editTextFilme.setError("Campo obrigatório!");
+        if(TextUtils.isEmpty(editTextTitulo.getText().toString())){
+            editTextTitulo.setError("Campo obrigatório!");
         } else {
             try {
                 bancoDados = openOrCreateDatabase("crudandroid", MODE_PRIVATE, null);
-                String sql = "UPDATE filme SET nome = ?, genero = ?, faixaetaria = ? WHERE id = ?";
+                String sql = "UPDATE livro SET titulo = ?, genero = ?, autor = ? WHERE id = ?";
                 SQLiteStatement stmt = bancoDados.compileStatement(sql);
-                stmt.bindString(1, editTextFilme.getText().toString());
+                stmt.bindString(1, editTextTitulo.getText().toString());
                 stmt.bindString(2, editTextGenero.getText().toString());
-                stmt.bindString(3, editTextFaixaEtaria.getText().toString());
+                stmt.bindString(3, editTextAutor.getText().toString());
                 stmt.bindLong(4, id );
                 stmt.executeInsert();
                 bancoDados.close();

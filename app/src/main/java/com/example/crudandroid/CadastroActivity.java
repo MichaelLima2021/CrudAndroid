@@ -12,9 +12,9 @@ import android.widget.Button;
 import android.widget.EditText;
 
 public class CadastroActivity extends AppCompatActivity {
-    EditText editTextFilme;
+    EditText editTextTitulo;
     EditText editTextGenero;
-    EditText editTextFaixaEtaria;
+    EditText editTextAutor;
     Button botao;
     SQLiteDatabase bancoDados;
 
@@ -23,9 +23,9 @@ public class CadastroActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro);
 
-        editTextFilme = (EditText) findViewById(R.id.editTextFilme);
+        editTextTitulo = (EditText) findViewById(R.id.editTextTitulo);
         editTextGenero = (EditText) findViewById(R.id.editTextGenero);
-        editTextFaixaEtaria = (EditText) findViewById(R.id.editTextFaixaEtaria);
+        editTextAutor = (EditText) findViewById(R.id.editTextAutor);
         botao = (Button) findViewById(R.id.buttonCadastrar);
 
         botao.setOnClickListener(new View.OnClickListener() {
@@ -37,17 +37,17 @@ public class CadastroActivity extends AppCompatActivity {
     }
 
     public void cadastrar() {
-        if (!TextUtils.isEmpty(editTextFilme.getText().toString())) {
+        if (!TextUtils.isEmpty(editTextTitulo.getText().toString())) {
             try {
                 SharedPreferences sharedPref = getSharedPreferences("crudandroidpref", MODE_PRIVATE);
                 String login = sharedPref.getString("login","");
 
                 bancoDados = openOrCreateDatabase("crudandroid", MODE_PRIVATE, null);
-                String sql = "INSERT INTO filme (nome, genero, faixaetaria, login) VALUES (?, ?, ?, ?)";
+                String sql = "INSERT INTO livro (titulo, genero, autor, login) VALUES (?, ?, ?, ?)";
                 SQLiteStatement stmt = bancoDados.compileStatement(sql);
-                stmt.bindString(1,editTextFilme.getText().toString());
+                stmt.bindString(1,editTextTitulo.getText().toString());
                 stmt.bindString(2,editTextGenero.getText().toString());
-                stmt.bindString(3,editTextFaixaEtaria.getText().toString());
+                stmt.bindString(3,editTextAutor.getText().toString());
                 stmt.bindString(4, login);
                 stmt.executeInsert();
                 bancoDados.close();
