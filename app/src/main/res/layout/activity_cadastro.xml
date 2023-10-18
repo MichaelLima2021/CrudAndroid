@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="#C8F6C7"
     android:backgroundTint="#C8F6C7"
+    android:rotation="360"
     tools:context=".CadastroActivity">
 
     <EditText
